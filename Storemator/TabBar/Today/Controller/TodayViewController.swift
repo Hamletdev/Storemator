@@ -10,49 +10,39 @@ import Foundation
 import UIKit
 
 fileprivate let reUseIdentifier = "TodayCell"
+fileprivate let reUseHeaderIdentifier = "TodayHeaderCell"
 
-class TodayViewController: UITableViewController {
+class TodayViewController: UICollectionViewController {
     
     var selectedCell: TodayViewCell?
-    
-    lazy var headerView: TodayHeaderView = {
-        let frame = CGRect(x: 0, y: 0, width: getCurrentWindow().bounds.size.width, height: 100)
-        let aView = TodayHeaderView(frame: frame)
-        aView.userAccountDisclosure = {
-            let accountVC = AccountViewController()
-            let navigationController = UINavigationController(rootViewController: accountVC)
-            self.present(navigationController, animated: true, completion: nil)
-        }
-        return aView
-    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
-        self.tableView.tableHeaderView = headerView
-        self.tableView.register(TodayViewCell.self, forCellReuseIdentifier: reUseIdentifier)
-        self.tableView.separatorStyle = .none
-        self.tableView.rowHeight = 440
+        self.collectionView.backgroundColor = .white
+        self.collectionView.register(TodayViewCell.self, forCellWithReuseIdentifier: reUseIdentifier)
+        self.collectionView.register(TodayHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: reUseHeaderIdentifier)
+//        self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 }
 
 
-//MARK: - DataSource
+//MARK: - UICVDataSource
 extension TodayViewController {
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 4
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCell(withIdentifier: reUseIdentifier, for: indexPath) as! TodayViewCell
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = self.collectionView.dequeueReusableCell(withReuseIdentifier: reUseIdentifier, for: indexPath) as! TodayViewCell
         if indexPath.row == 0 {
             cell.bgImageView.image = #imageLiteral(resourceName: "cover_4")
-        } else {
+        } else  {
             cell.bgImageView.image = #imageLiteral(resourceName: "cover_5")
         }
         return cell
@@ -62,8 +52,9 @@ extension TodayViewController {
 
 //MARK: - UITableViewDelegate
 extension TodayViewController {
-    override func tableView(_ tableView: UITableView, didHighlightRowAt indexPath: IndexPath) {
-        guard let row = self.tableView.cellForRow(at: indexPath) as? TodayViewCell else {
+    
+    override func collectionView(_ collectionView: UICollectionView, didHighlightItemAt indexPath: IndexPath) {
+        guard let row = self.collectionView.cellForItem(at: indexPath) as? TodayViewCell else {
             return
         }
         UIView.animate(withDuration: 0.1) {
@@ -71,17 +62,80 @@ extension TodayViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, didUnhighlightRowAt indexPath: IndexPath) {
-        guard let row = self.tableView.cellForRow(at: indexPath) as? TodayViewCell else {return}
+    override func collectionView(_ collectionView: UICollectionView, didUnhighlightItemAt indexPath: IndexPath) {
+        guard let row = self.collectionView.cellForItem(at: indexPath) as? TodayViewCell else {return}
         UIView.animate(withDuration: 0.3) {
             row.bgView.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let todayDetailVC = TodayDetailViewController()
-        todayDetailVC.selectedCell = (self.tableView.cellForRow(at: indexPath) as! TodayViewCell)
+        todayDetailVC.selectedCell = (self.collectionView.cellForItem(at: indexPath) as! TodayViewCell)
         todayDetailVC.modalPresentationStyle = .fullScreen
         self.present(todayDetailVC, animated: true, completion: nil)
     }
+}
+
+
+// MARK: - UICollectionViewDelegateFlowLayout
+
+extension TodayViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if self.view.traitCollection.horizontalSizeClass == .compact {
+            return CGSize(width: getCurrentWindow().bounds.size.width, height: 390)
+        } else {
+            
+            // Number of Items per Row
+            let numberOfItemsInRow = 2
+            
+            // Current Row Number
+            let rowNumber = indexPath.item/numberOfItemsInRow
+            
+            // Compressed With
+            let compressedWidth = getCurrentWindow().bounds.size.width/3
+            
+            // Expanded Width
+            let expandedWidth = (getCurrentWindow().bounds.size.width/3) * 2
+            
+            // Is Even Row
+            let isEvenRow = rowNumber % 2 == 0
+            
+            // Is First Item in Row
+            let isFirstItem = indexPath.item % numberOfItemsInRow != 0
+            
+            // Calculate Width
+            var width: CGFloat = 0.0
+            if isEvenRow {
+                width = isFirstItem ? compressedWidth : expandedWidth
+            } else {
+                width = isFirstItem ? expandedWidth : compressedWidth
+            }
+            
+            return CGSize(width: width, height: 390)
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: getCurrentWindow().bounds.size.width, height: 90)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let sectionHeader = self.collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: reUseHeaderIdentifier, for: indexPath) as! TodayHeaderView
+        sectionHeader.userAccountDisclosure = {
+            let accountVC = AccountViewController()
+            let navigationController = UINavigationController(rootViewController: accountVC)
+            self.present(navigationController, animated: true, completion: nil)
+        }
+        return sectionHeader
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 25
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 5
+    }
+    
 }

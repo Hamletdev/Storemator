@@ -18,7 +18,7 @@ class MainTabViewController: UITabBarController, UITabBarControllerDelegate {
     
     func constructTabBarViewControllers() {
         //TodayVC
-        let todayVC = self.constructNavigationController(selectedImage: #imageLiteral(resourceName: "tabbar_apps"), unSelectedImage: #imageLiteral(resourceName: "tabbar_apps"), rootViewController: TodayViewController())
+        let todayVC = self.constructNavigationController(selectedImage: #imageLiteral(resourceName: "tabbar_apps"), unSelectedImage: #imageLiteral(resourceName: "tabbar_apps"), rootViewController: TodayViewController(collectionViewLayout: UICollectionViewFlowLayout()))
         //GamesVC
         let gamesVC = self.constructNavigationController(selectedImage: #imageLiteral(resourceName: "tabbar_games"), unSelectedImage: #imageLiteral(resourceName: "tabbar_games"), rootViewController: GamesViewController())
         //UpdatesVC

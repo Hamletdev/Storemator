@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TodayViewCell: UITableViewCell {
+class TodayViewCell: UICollectionViewCell {
     
 //MARK: - Properties
     
@@ -31,9 +31,9 @@ class TodayViewCell: UITableViewCell {
     
     
 //MARK: - Methods
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.selectionStyle = .none
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.setupUI()
     }
     
@@ -47,8 +47,7 @@ class TodayViewCell: UITableViewCell {
 extension TodayViewCell {
     
     func setupUI() {
-        
-        self.contentView.addSubview(bgView)
+        self.addSubview(bgView)
         bgView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 20, bottomPadding: 0, rightPadding: 20, width: 0, height: 390)
         
         bgView.addSubview(bgImageView)

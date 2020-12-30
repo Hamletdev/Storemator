@@ -17,6 +17,7 @@ class GameFeaturedCollectionView: UICollectionView {
         self.register(GameFeaturedCollectionViewCell.self, forCellWithReuseIdentifier: reUseCellFeaturedIdentifier)
         self.decelerationRate = UIScrollView.DecelerationRate.fast
         self.showsHorizontalScrollIndicator = false
+        self.showsVerticalScrollIndicator = false
     }
     
     required init?(coder: NSCoder) {

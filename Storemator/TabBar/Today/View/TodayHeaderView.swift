@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TodayHeaderView: UIView {
+class TodayHeaderView: UICollectionReusableView {
     
     var userAccountDisclosure: (() -> Void)?
     
@@ -28,7 +28,7 @@ class TodayHeaderView: UIView {
         return aLabel
     }()
     
-    let userProfileButton: UIButton = {
+    lazy var userProfileButton: UIButton = {
         let aButton = UIButton()
         aButton.setImage(#imageLiteral(resourceName: "demo_icon"), for: UIControl.State.normal)
         aButton.setImage(#imageLiteral(resourceName: "demo_icon"), for: UIControl.State.highlighted)
