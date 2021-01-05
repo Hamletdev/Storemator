@@ -39,8 +39,9 @@ class GameDetailViewController: UIViewController {
     
     lazy var topImageView: UIImageView = {
         let tIV = UIImageView()
-        tIV.contentMode = .scaleAspectFill
+        tIV.contentMode = .center
         tIV.layer.masksToBounds = true
+        tIV.isUserInteractionEnabled = true
         tIV.image = #imageLiteral(resourceName: "cover_detail")
         return tIV
     }()
@@ -51,13 +52,13 @@ class GameDetailViewController: UIViewController {
         self.view.backgroundColor = .white
         
         self.view.addSubview(self.detailTableView)
-        detailTableView.anchorView(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topPadding: -20, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 0)
+        detailTableView.anchorView(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: self.view.bottomAnchor, right: self.view.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 0)
         
-        self.view.addSubview(self.topImageView)
-        topImageView.anchorView(top: self.view.topAnchor, left: self.detailTableView.leftAnchor, bottom: nil, right: self.detailTableView.rightAnchor, topPadding: -20, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 220)
+        self.detailTableView.addSubview(self.topImageView)
+        topImageView.anchorView(top: self.detailTableView.topAnchor, left: self.detailTableView.leftAnchor, bottom: nil, right: self.detailTableView.rightAnchor, topPadding: -220, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 220)
         
-        self.view.addSubview(self.navigationView)
-        navigationView.anchorView(top: self.view.topAnchor, left: self.view.leftAnchor, bottom: nil, right: self.view.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 45)
+        self.topImageView.addSubview(self.navigationView)
+        navigationView.anchorView(top: self.topImageView.topAnchor, left: self.topImageView.leftAnchor, bottom: nil, right: self.topImageView.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 48)
     }
     
     
@@ -80,7 +81,6 @@ class GameDetailViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        // navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
 }
 

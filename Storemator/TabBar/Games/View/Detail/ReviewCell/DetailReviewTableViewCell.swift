@@ -45,7 +45,7 @@ class DetailReviewTableViewCell: UITableViewCell {   // 160+42(height)
         headerView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 42)
         
         self.addSubview(detailCollectionView)
-        detailCollectionView.anchorView(top: self.headerView.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 160)
+        detailCollectionView.anchorView(top: self.headerView.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 0)
     }
 }
 

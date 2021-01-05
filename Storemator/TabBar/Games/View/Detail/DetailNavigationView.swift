@@ -14,7 +14,7 @@ class DetailNavigationView: UIView {
     var goBackClosure: (() -> ())?
     
     lazy var goBackButton: UIButton = {
-        let aButton = UIButton()
+        let aButton = UIButton(type: .roundedRect)
         aButton.setTitle("Back", for: .normal)
         aButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         aButton.setTitleColor(.systemBlue, for: UIControl.State.normal)
@@ -46,9 +46,7 @@ class DetailNavigationView: UIView {
 //MARK: - Helpers
 extension DetailNavigationView {
     @objc func backButtonPressed() {
-        print("Back Button")
-        // delegate.backButtonPressed()
-        //should assign DetailViewController a delegate and dismiss detailViewController
+        print("Back Buttonnnnnnnnnnn")
         self.goBackClosure!()
     }
 }

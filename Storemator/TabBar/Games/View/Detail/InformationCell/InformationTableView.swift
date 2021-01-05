@@ -17,6 +17,7 @@ class InformationTableView: UITableView {
         self.register(InformationTableViewCell.self, forCellReuseIdentifier: reUseInformationIdentifier)
         self.rowHeight = 50
         self.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        self.tableFooterView = UIView(frame: .zero)
         self.layoutIfNeeded()
     }
     
