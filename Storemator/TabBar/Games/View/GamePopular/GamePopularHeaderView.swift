@@ -34,17 +34,17 @@ class GamePopularHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layoutIfNeeded()
+        self.layoutUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+      func layoutUI() {
+
         self.addSubview(topView)
-        topView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 20, bottomPadding: 0, rightPadding: 20, width: self.bounds.width, height: 0.4)
+        topView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 20, bottomPadding: 0, rightPadding: 20, width: 0, height: 0.4)
         
         self.addSubview(popularLabel)
         popularLabel.anchorView(top: nil, left: self.leftAnchor, bottom: nil, right: nil, topPadding: 0, leftPadding: 12, bottomPadding: 0, rightPadding: 0, width: 0, height: 0)

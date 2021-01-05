@@ -36,6 +36,7 @@ class GamesViewController: UITableViewController {
         self.tableView.register(GameFeaturedTableViewCell.self, forCellReuseIdentifier: reuseCellIdentifier1)
         self.tableView.register(GamePopularTableViewCell.self, forCellReuseIdentifier: reuseCellIdentifier2)
         self.tableView.register(GameLinkTableViewCell.self, forCellReuseIdentifier: reuseCellIdentifier3)
+        self.tableView.separatorStyle = .none
         
         self.addIconButtonOnGameNavigationBar()
         self.adjustGameNavigationAppearance()

@@ -36,19 +36,19 @@ class GamePopularTableViewCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.layoutIfNeeded()
+        self.layoutUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
+     func layoutUI() {
         contentView.addSubview(popularCellHeaderView)
-        popularCellHeaderView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: getCurrentWindow().bounds.size.width, height: 42)
+        popularCellHeaderView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 42)
         
         contentView.addSubview(popularCollectionView)
-        popularCollectionView.anchorView(top: self.popularCellHeaderView.bottomAnchor, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: getCurrentWindow().bounds.size.width, height: 240)
+        popularCollectionView.anchorView(top: self.popularCellHeaderView.bottomAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: 0, height: 240)
     }
     
 }

@@ -60,15 +60,14 @@ class GamePopularCollectionViewCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.layoutIfNeeded()
+        self.layoutUI()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
+     func layoutUI() {
         
         self.addSubview(iconImageView)
         iconImageView.anchorView(top: nil, left: self.leftAnchor, bottom: nil, right: nil, topPadding: 0, leftPadding: 12, bottomPadding: 0, rightPadding: 0, width: 55, height: 55)
@@ -83,12 +82,12 @@ class GamePopularCollectionViewCell: UICollectionViewCell {
         categoryLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 8).isActive = true
         
         self.addSubview(getButton)
-        getButton.anchorView(top: nil, left: nil, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 12, width: 80, height: 0)
+        getButton.anchorView(top: nil, left: nil, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 12, width: 80, height: 35)
         getButton.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         getButton.layer.cornerRadius = 15
         
         self.addSubview(bottomView)
-        bottomView.anchorView(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: self.bounds.width - 40, height: 0.4)
+        bottomView.anchorView(top: nil, left: self.leftAnchor, bottom: self.bottomAnchor, right: self.rightAnchor, topPadding: 0, leftPadding: 15, bottomPadding: 0, rightPadding: 15, width: 0, height: 0.4)
     }
     
 }

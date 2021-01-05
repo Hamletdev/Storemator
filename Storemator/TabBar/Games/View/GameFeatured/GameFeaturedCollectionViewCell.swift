@@ -65,9 +65,9 @@ class GameFeaturedCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        print("BBBBBBBBBBBBB-----\(self.bounds.size.height)")
+
         self.addSubview(topView)
-        topView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 0, bottomPadding: 0, rightPadding: 0, width: self.bounds.size.width - 60, height: 0.4)
+        topView.anchorView(top: self.topAnchor, left: self.leftAnchor, bottom: nil, right: self.rightAnchor, topPadding: 0, leftPadding: 20, bottomPadding: 0, rightPadding: 20, width: 0, height: 0.4)
         
         self.addSubview(featuredLabel)
         featuredLabel.anchorView(top: self.topView.bottomAnchor, left: self.leftAnchor, bottom: nil, right: nil, topPadding: 5, leftPadding: 20, bottomPadding: 0, rightPadding: 0, width: 0, height: 0)
